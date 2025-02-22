@@ -1,0 +1,160 @@
+body {
+    margin: 0;
+    padding: 100;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff9a8b, #ff6a88); /* Теплый светлый фон */
+    font-family: 'Comfortaa', cursive;
+    transition: background 0.5s ease;
+}
+
+body.dark {
+    background: linear-gradient(135deg, #4b2e39, #8a4f7d); /* Теплый темный фон */
+}
+
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px; /* Увеличен отступ для переключателя */
+}
+
+.theme-toggle {
+    z-index: 3;
+}
+
+.toggle-button {
+    width: 60px;
+    height: 30px;
+    background: #fff3e0;
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center; /* Оставляем для вертикального выравнивания */
+    justify-content: space-between;
+    padding: 0 4px; /* Уменьшаем padding для правильного расположения иконок */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+}
+
+.toggle-button::after {
+    content: '';
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    background: #ff8c61;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease, background 0.3s ease;
+    z-index: 2; /* Увеличиваем z-index чтобы точно перекрывать */
+}
+
+body.dark .toggle-button {
+    background: #d9b8c4; /* Цвет кнопки в темном режиме */
+}
+
+body.dark .toggle-button::after {
+    transform: translateX(38px); /* Увеличиваем с 28px до 30px для полного перемещения к краю */
+    background: #d96c75;
+}
+
+.sun, .moon {
+    font-size: 16px; /* Уменьшаем размер иконок */
+    user-select: none;
+    z-index: 1;
+    line-height: 1; /* Добавляем для вертикального выравнивания */
+    display: flex; /* Добавляем для лучшего контроля размещения */
+    align-items: center;
+    justify-content: center;
+    width: 26px; /* Задаем фиксированную ширину равную кружку */
+    height: 26px; /* Задаем фиксированную высоту равную кружку */
+}
+
+.breath-circle {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, #fff5e6 10%, #ffccbc 70%);
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(255, 154, 139, 0.8),
+                0 0 60px rgba(255, 154, 139, 0.5);
+    transition: all 1s ease-in-out;
+    position: relative; /* Убедимся, что position: relative установлен */
+    z-index: 1;
+}
+
+body.dark .breath-circle {
+    background: radial-gradient(circle, #ffe6e6 10%, #d96c75 70%);
+    box-shadow: 0 0 30px rgba(217, 108, 117, 0.8),
+                0 0 60px rgba(217, 108, 117, 0.5);
+}
+
+.breath-circle::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(255, 204, 188, 0.3);
+    filter: blur(20px);
+    z-index: -1;
+}
+
+.inhale {
+    transform: scale(1.5);
+    box-shadow: 0 0 50px rgba(255, 154, 139, 1),
+                0 0 80px rgba(255, 154, 139, 0.7);
+}
+
+body.dark .inhale {
+    box-shadow: 0 0 50px rgba(217, 108, 117, 1),
+                0 0 80px rgba(217, 108, 117, 0.7);
+}
+
+.exhale {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(255, 154, 139, 0.6),
+                0 0 40px rgba(255, 154, 139, 0.3);
+}
+
+body.dark .exhale {
+    box-shadow: 0 0 20px rgba(217, 108, 117, 0.6),
+                0 0 40px rgba(217, 108, 117, 0.3);
+}
+
+.hold {
+    transform: scale(1.3);
+    background: radial-gradient(circle, #fff5e6 20%, #ffb6c1 70%);
+    box-shadow: 0 0 40px rgba(255, 182, 193, 0.9),
+                0 0 70px rgba(255, 182, 193, 0.6);
+}
+
+body.dark .hold {
+    background: radial-gradient(circle, #ffe6e6 20%, #e68c94 70%);
+    box-shadow: 0 0 40px rgba(230, 140, 148, 0.9),
+                0 0 70px rgba(189, 109, 116, 0.678);
+}
+
+.instruction {
+    position: absolute;
+    color: #5e2c11;
+    font-size: 24px;
+    text-shadow: 0 0 5px rgba(218, 88, 18, 0.5);
+    z-index: 2;
+    left: 50%; /* Центрирование по горизонтали */
+    top: 50%;  /* Центрирование по вертикали */
+    transform: translate(-50%, -50%); /* Точное центрирование */
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    text-align: center; /* Центрирование текста */
+    width: 100%; /* Чтобы текст центрировался правильно */
+}
+
+body.dark .instruction {
+    color: #2e5591;
+    text-shadow: 0 0 5px rgba(245, 214, 214, 0.5);
+}
